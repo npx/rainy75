@@ -1,0 +1,11 @@
+#!/bin/sh
+# Strip the product id from the base keymap, re-stage it if it was staged,
+# and regenerate the gitignored per-link copies.
+set -eu
+BASE=rainy_75_jis.layout.json
+[ -f "$BASE" ] || exit 0
+scripts/keymap.sh normalize
+if ! git diff --cached --quiet -- "$BASE" || ! git ls-files --error-unmatch "$BASE" >/dev/null 2>&1; then
+  git add -- "$BASE"
+fi
+scripts/keymap.sh build

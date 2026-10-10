@@ -1,0 +1,2 @@
+# vendor files stay byte for byte (they are CRLF)
+vendor/* -text
